@@ -1,21 +1,13 @@
 import React from "react";
 import Card from "./Card";
+import { listData } from "@/lib/data";
 
 export default function CardList() {
   return (
-    <div className="h-[calc(100vh-100px)] overflow-scroll">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+    <div className="lg:h-[65vh] overflow-scroll">
+      {listData.map((house) => (
+        <Card key={house.id} house={house} />
+      ))}
     </div>
   );
 }

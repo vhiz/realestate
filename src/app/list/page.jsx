@@ -1,15 +1,19 @@
 import CardList from "@/components/CardList/CardList";
 import Filter from "@/components/Filter";
+import Map from "@/components/Map";
+import { listData } from "@/lib/data";
 import React from "react";
 
 export default function ListPage() {
   return (
     <div className="h-full flex">
-      <div className="flex-[3] pr-12">
+      <div className="w-full lg:pr-12 lg:flex-[3]">
         <Filter />
-        <CardList/>
+        <CardList />
       </div>
-      <div className="flex-[2]">map</div>
+      <div className="flex-[2] hidden h-full lg:block">
+        <Map houses={listData} />
+      </div>
     </div>
   );
 }
