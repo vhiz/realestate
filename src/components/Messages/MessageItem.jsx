@@ -4,7 +4,7 @@ import Messages from "./Messages";
 
 export default function MessageItem() {
   return (
-    <div className="collapse overflow-visible collapse-arrow rounded-md bg-white">
+    <div className="collapse overflow-visible collapse-arrow rounded-md bg-base-200">
       <input type="checkbox" />
       <div className="collapse-title text-xl font-medium">
         <div className="w-full flex justify-between items-center">

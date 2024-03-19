@@ -17,7 +17,7 @@ export default function ItemInfo() {
     <div className="flex flex-col px-3">
       <div className="flex flex-col gap-y-4">
         <h2 className="text-lg font-semibold md:text-xl">General</h2>
-        <div className="bg-white rounded-md p-4 gap-y-4 flex flex-col">
+        <div className="bg-base-200 rounded-md p-4 gap-y-4 flex flex-col">
           <div className="flex items-center gap-x-1">
             <VscTools className="text-2xl text-yellow-300" />
             <div className="flex flex-col gap-y-0">
@@ -51,15 +51,15 @@ export default function ItemInfo() {
       <div className="flex flex-col gap-y-4 mt-5">
         <h2 className="text-lg font-semibold md:text-xl">Room Sizes</h2>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-2 bg-white p-2 rounded-md">
+          <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <TbRulerMeasure className="text-yellow-400" />
             <span>{singlePostData.size} sqm</span>
           </div>
-          <div className="flex items-center gap-x-2 bg-white p-2 rounded-md">
+          <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <IoBedOutline className="text-yellow-400" />
             <span>{singlePostData.bedRooms} Bedroom</span>
           </div>
-          <div className="flex items-center gap-x-2 bg-white p-2 rounded-md">
+          <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <BiBath className="text-yellow-400" />
             <span>{singlePostData.bathroom} Bathroom</span>
           </div>
@@ -67,7 +67,7 @@ export default function ItemInfo() {
       </div>
       <div className="flex flex-col gap-y-4 mt-4">
         <h2 className="text-lg font-semibold md:text-xl">Nearby Places</h2>
-        <div className="bg-white p-3 rounded-md flex justify-between w-full">
+        <div className="bg-base-200 p-3 rounded-md flex justify-between w-full">
           <div className="flex items-center gap-x-1">
             <IoSchoolOutline className="text-yellow-400 text-xl md:text-2xl" />
             <div className="flex flex-col">

@@ -4,8 +4,8 @@ export default function Message({ own }) {
   return (
     <div className={`chat ${own ? "chat-end" : "chat-start"} mt-3`}>
       <div
-        className={`chat-bubble text-black  ${
-          own ? "bg-yellow-400/50" : "bg-base-200 "
+        className={`chat-bubble text-white  ${
+          own ? "bg-yellow-400/50" : "bg-blue-400 "
         }`}
       >
         I hate you!

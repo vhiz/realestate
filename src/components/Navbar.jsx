@@ -4,6 +4,7 @@ import { CiMenuBurger } from "react-icons/ci";
 import { IoIosClose } from "react-icons/io";
 import Image from "next/image";
 import { userData } from "@/lib/data";
+import Toggle from "./Toggle";
 export default function Navbar() {
   const user = true;
   return (
@@ -31,19 +32,27 @@ export default function Navbar() {
           </li>
         </ul>
       </div>
-      <div className="flex gap-x-3">
+      <div className="flex gap-x-3 items-center">
+        <Toggle />
+
         {user ? (
           <div className="flex items-center gap-x-3">
             <div className="relative w-12 h-12 overflow-hidden rounded-full">
               <Image src={userData.img} alt="" objectFit="cover" fill />
             </div>
-            <span className="text-semibold hidden md:flex">{userData.name}</span>
-            <Link href={"/profile"} className="btn rounded-md relative hidden md:flex">
+            <span className="text-semibold hidden md:flex">
+              {userData.name}
+            </span>
+            <Link
+              href={"/profile"}
+              className="btn rounded-md relative hidden md:flex"
+            >
               <div className="badge badge-error badge-sm h-5 w-5 text-white absolute -top-2 -right-[0.7rem]">
                 <span className="text-xs">1</span>
               </div>
               Profile
             </Link>
+            <form action=""><button className="btn rounded-md ml-3 btn-error">Logout</button></form>
           </div>
         ) : (
           <div className="hidden gap-x-4 md:flex">

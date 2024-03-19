@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
           <input id="my-drawer" type="checkbox" className="drawer-toggle" />
           <div className="drawer-content">
             <Navbar />
-            <div className="h-[calc(100vh-100px)] px-5 lg:px-10">{children}</div>
+            <div className="h-[calc(100vh-100px)] px-5 lg:px-10">
+              {children}
+            </div>
           </div>
           <div className="drawer-side md:hidden">
             <label

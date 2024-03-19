@@ -14,8 +14,16 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require("daisyui"),require('tailwind-scrollbar')],
+  plugins: [require("daisyui"), require("tailwind-scrollbar")],
   daisyui: {
-    themes: ["cupcake", "sunset"],
+    themes: [
+      {
+        cupcake: {
+          ...require("daisyui/src/theming/themes")["cupcake"],
+          "base-200": "#ffffff",
+        },
+      },
+      "sunset",
+    ],
   },
 };
