@@ -5,12 +5,13 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css";
 import L from "leaflet";
 import "leaflet-defaulticon-compatibility";
-import Pin from "./Pin";
-export default function Map({ houses }) {
+import PinInfo from "./PinInfo";
+import { listData, singlePostData } from "@/lib/data";
+export default function MapInfo() {
   return (
     <MapContainer
-      center={[51.5074, -0.1278]}
-      zoom={7}
+      center={[singlePostData.latitude, singlePostData.longitude]}
+      zoom={13}
       scrollWheelZoom={false}
       className="w-full h-full rounded-md"
     >
@@ -18,9 +19,7 @@ export default function Map({ houses }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {houses.map((house) => (
-        <Pin key={house._id} house={house} />
-      ))}
+      <PinInfo house={singlePostData} />
     </MapContainer>
   );
 }
