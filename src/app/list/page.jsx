@@ -4,6 +4,11 @@ import Map from "@/components/Map";
 import { listData } from "@/lib/data";
 import React from "react";
 
+export const metadata = {
+  title: "22 (listings)",
+  description: "there are 22 listings in your area",
+};
+
 export default function ListPage() {
   return (
     <div className="h-full flex">

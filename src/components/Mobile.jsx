@@ -17,7 +17,7 @@ export default function Mobile() {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   }
   return (

@@ -35,7 +35,7 @@ export default function Navbar() {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   }
   return (

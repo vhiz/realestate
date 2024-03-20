@@ -4,6 +4,11 @@ import { listData, singlePostData, userData } from "@/lib/data";
 import Image from "next/image";
 import { CiLocationOn } from "react-icons/ci";
 
+export const metadata = {
+  title: `${singlePostData.title}`,
+  description: singlePostData.description,
+};
+
 export default function SinglePage() {
   const item = singlePostData;
   return (
@@ -13,7 +18,9 @@ export default function SinglePage() {
         <div className="pt-3 flex flex-col w-full gap-y-6">
           <div className="flex w-full justify-between items-center">
             <div className="flex flex-col gap-y-4">
-              <h2 className="text-xl font-semibold md:text-2xl">{item.title}</h2>
+              <h2 className="text-xl font-semibold md:text-2xl">
+                {item.title}
+              </h2>
               <div className="flex gap-x-2 items-center text-gray-500">
                 <CiLocationOn />
                 {item.address},{item.city}
