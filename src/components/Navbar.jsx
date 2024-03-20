@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { BiHomeAlt } from "react-icons/bi";
 import { CiMenuBurger } from "react-icons/ci";
@@ -5,8 +7,37 @@ import { IoIosClose } from "react-icons/io";
 import Image from "next/image";
 import { userData } from "@/lib/data";
 import Toggle from "./Toggle";
+import { useEffect, useState } from "react";
+import { getSession, logout } from "@/lib/getSession";
+import sessionStore from "@/store/sessionStore";
+import axios from "axios";
 export default function Navbar() {
-  const user = true;
+  const { session, setSession } = sessionStore();
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    async function fetchSession() {
+      try {
+        const session = await getSession();
+        setSession({ ...session, img: userData.img });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchSession();
+  }, [setSession, session]);
+
+  async function handleSignOut(e) {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await axios.post("/api/logout");
+      setSession(null);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(true);
+    }
+  }
   return (
     <div className="flex justify-between h-[100px] w-full p-5 items-center lg:p-10">
       <div className="flex items-center gap-x-5">
@@ -35,13 +66,13 @@ export default function Navbar() {
       <div className="flex gap-x-3 items-center">
         <Toggle />
 
-        {user ? (
+        {session?.isLoggedIn ? (
           <div className="flex items-center gap-x-3">
             <div className="relative w-12 h-12 overflow-hidden rounded-full">
-              <Image src={userData.img} alt="" objectFit="cover" fill />
+              <Image src={session.img} alt="" objectFit="cover" fill />
             </div>
             <span className="text-semibold hidden md:flex">
-              {userData.name}
+              {session.username}
             </span>
             <Link
               href={"/profile"}
@@ -52,12 +83,24 @@ export default function Navbar() {
               </div>
               Profile
             </Link>
-            <form action=""><button className="btn rounded-md ml-3 btn-error">Logout</button></form>
+            <form className="hidden lg:block" onSubmit={handleSignOut}>
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn rounded-md ml-3 btn-error text-base-100"
+              >
+                Logout
+              </button>
+            </form>
           </div>
         ) : (
           <div className="hidden gap-x-4 md:flex">
-            <button className="btn rounded-lg">SignIn</button>
-            <button className="btn btn-warning rounded-lg">SignOut</button>
+            <Link href={"/login"} className="btn rounded-lg">
+              SignIn
+            </Link>
+            <Link href={"/register"} className="btn btn-warning rounded-lg">
+              SignOut
+            </Link>
           </div>
         )}
         <label

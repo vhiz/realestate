@@ -1,20 +1,75 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { IoKeyOutline } from "react-icons/io5";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 export default function LoginForm() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInputs((prevInputs) => ({ ...prevInputs, [name]: value }));
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    try {
+      await axios.post("/api/login", inputs);
+      router.push("/");
+    } catch (error) {
+      setError(error.response.data.error);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
-    <form className="w-full flex flex-col gap-y-4 ">
+    <form className="w-full flex flex-col gap-y-4 " onSubmit={handleSubmit}>
       <label className="input input-bordered rounded-md flex items-center gap-2">
         <CiUser className="opacity-70" />
-        <input type="text" className="grow" required placeholder="Username" />
+        <input
+          type="text"
+          name="username"
+          onChange={handleChange}
+          className="grow"
+          required
+          placeholder="Username"
+        />
       </label>
       <label className="input input-bordered rounded-md flex items-center gap-2">
         <IoKeyOutline className="opacity-70" />
-        <input type="password" className="grow" required placeholder="password" />
+        <input
+          type="password"
+          className="grow"
+          required
+          placeholder="password"
+          name="password"
+          onChange={handleChange}
+        />
       </label>
-      <button className="btn rounded-md bg-blue-400 border-none text-white hover:bg-blue-300">Login</button>
+      {error && (
+        <span className="font-semibold text-error w-full text-center">
+          {error}
+        </span>
+      )}
+      <button
+        type="submit"
+        disabled={loading}
+        className="btn rounded-md bg-blue-400 border-none text-white hover:bg-blue-300"
+      >
+        Login
+      </button>
       <Link
         className="link link-info link-hover w-full text-center"
         href={"/register"}
