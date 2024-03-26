@@ -15,10 +15,13 @@ export default function Card({ house }) {
           className="group-hover:scale-[1.1] duration-300 transition-all"
           fill
         />
+        <div className="absolute top-2 left-2 p-2 bg-gray-700 text-xs capitalize rounded-md">
+          {house.type}
+        </div>
       </div>
       <div className="flex-[2] lg:pl-5 flex h-full flex-col justify-between">
         <Link
-          href={`/list/${house.id}`}
+          href={`/list/${house._id}`}
           className="text-xl font-semibold capitalize link link-hover transition-all duration-300 hover:text-blue-500"
         >
           {house.title}
@@ -26,7 +29,7 @@ export default function Card({ house }) {
         <div className="flex items-center gap-x-1">
           <CiLocationOn />
           <span className="text-sm text-gray-500 capitalize">
-            {house.address}
+            {house.address} {house.city}
           </span>
         </div>
         <span className="text-xl bg-yellow-300/45 rounded-md w-max p-1">
@@ -34,11 +37,17 @@ export default function Card({ house }) {
         </span>
         <div className="flex items-center justify-between">
           <div className="flex gap-x-4">
-            <div data-theme="cupcake" className="flex items-center gap-x-1 bg-gray-300 rounded-md p-1 text-xs font-semibold">
-              <IoBedOutline /> {house.bedroom} Bedroom
+            <div
+              data-theme="cupcake"
+              className="flex items-center gap-x-1 bg-gray-300 rounded-md p-1 text-xs font-semibold"
+            >
+              <IoBedOutline /> {house.bedRooms} Bedroom
             </div>
-            <div data-theme="cupcake" className="flex items-center gap-x-1 bg-gray-300 rounded-md p-1 text-xs font-semibold">
-              <PiBathtubLight /> {house.bathroom} Bathroom
+            <div
+              data-theme="cupcake"
+              className="flex items-center gap-x-1 bg-gray-300 rounded-md p-1 text-xs font-semibold"
+            >
+              <PiBathtubLight /> {house.bathRooms} Bathroom
             </div>
           </div>
           <div className="flex gap-x-4">

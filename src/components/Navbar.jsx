@@ -11,10 +11,14 @@ import { useEffect, useState } from "react";
 import { getSession, logout } from "@/lib/getSession";
 import sessionStore from "@/store/sessionStore";
 import axios from "axios";
+import { usePathname } from "next/navigation";
 export default function Navbar() {
   const { session, setSession } = sessionStore();
   const [loading, setLoading] = useState(false);
+
+  const pathname = usePathname();
   useEffect(() => {
+    if (pathname !== "/") return;
     async function fetchSession() {
       try {
         const session = await getSession();
@@ -24,7 +28,7 @@ export default function Navbar() {
       }
     }
     fetchSession();
-  }, [setSession, session]);
+  }, [setSession, pathname]);
 
   async function handleSignOut(e) {
     e.preventDefault();
@@ -53,7 +57,7 @@ export default function Navbar() {
             <Link href={"/"}>Home</Link>
           </li>
           <li>
-            <Link href={"/"}>About</Link>
+            <Link href={"/list"}>Listing</Link>
           </li>
           <li>
             <Link href={"/"}>Contact</Link>
@@ -99,7 +103,7 @@ export default function Navbar() {
               SignIn
             </Link>
             <Link href={"/register"} className="btn btn-warning rounded-lg">
-              SignOut
+              SignUp
             </Link>
           </div>
         )}

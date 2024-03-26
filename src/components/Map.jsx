@@ -18,8 +18,8 @@ export default function Map({ houses }) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {houses.map((house) => (
-        <Pin key={house._id} house={house} />
+      {houses.map((house,i) => (
+        <Pin key={i} house={house} />
       ))}
     </MapContainer>
   );

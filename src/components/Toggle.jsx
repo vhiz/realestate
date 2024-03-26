@@ -3,22 +3,25 @@
 import { useEffect, useState } from "react";
 
 export default function Toggle() {
-  const [isdark, setIsdark] = useState(
-    JSON.parse(localStorage?.getItem("isdark")) || "sunset"
-  );
+  const [isDark, setIsDark] = useState(() => {
+    const storedValue = localStorage?.getItem("isdark");
+    return storedValue !== null ? JSON.parse(storedValue) : "sunset";
+  });
+
   useEffect(() => {
-    if (isdark == null) localStorage.setItem("isdark", "sunset");
-    localStorage.setItem("isdark", JSON.stringify(isdark));
-  }, [isdark]);
+    if (isDark !== null) {
+      localStorage.setItem("isdark", JSON.stringify(isDark));
+    }
+  }, [isDark]);
   return (
     <div>
       <input
         type="checkbox"
         value="sunset"
-        checked={isdark === "sunset"}
+        checked={isDark === "sunset"}
         className="toggle theme-controller"
         onChange={() =>
-          setIsdark((prev) => (prev === "cupcake" ? "sunset" : "cupcake"))
+          setIsDark((prev) => (prev === "cupcake" ? "sunset" : "cupcake"))
         }
       />
     </div>

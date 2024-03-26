@@ -7,10 +7,10 @@ import L from "leaflet";
 import "leaflet-defaulticon-compatibility";
 import PinInfo from "./PinInfo";
 import { listData, singlePostData } from "@/lib/data";
-export default function MapInfo() {
+export default function MapInfo({ listing }) {
   return (
     <MapContainer
-      center={[singlePostData.latitude, singlePostData.longitude]}
+      center={[listing?.latitude, listing?.longitude]}
       zoom={13}
       scrollWheelZoom={false}
       className="w-full h-full rounded-md"
@@ -19,7 +19,7 @@ export default function MapInfo() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <PinInfo house={singlePostData} />
+      <PinInfo house={listing} />
     </MapContainer>
   );
 }

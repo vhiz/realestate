@@ -31,8 +31,8 @@ export default function Mobile() {
       </label>
       <label htmlFor="my-drawer">
         <li>
-          <Link className="text-4xl" href={"/"}>
-            About
+          <Link className="text-4xl" href={"/list"}>
+            Listing
           </Link>
         </li>
       </label>

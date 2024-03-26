@@ -12,39 +12,31 @@ import { CiBookmark } from "react-icons/ci";
 import MapInfo from "./MapInfo/MapInfo";
 import { singlePostData } from "@/lib/data";
 
-export default function ItemInfo() {
+export default function ItemInfo({ listing }) {
   return (
     <div className="flex flex-col px-3">
       <div className="flex flex-col gap-y-4">
         <h2 className="text-lg font-semibold md:text-xl">General</h2>
         <div className="bg-base-200 rounded-md p-4 gap-y-4 flex flex-col">
-          <div className="flex items-center gap-x-1">
-            <VscTools className="text-2xl text-yellow-300" />
-            <div className="flex flex-col gap-y-0">
-              <span className="text-base font-semibold md:text-lg">Utilities</span>
-              <span className="text-xs md:text-sm text-gray-400 font-medium">
-                Renter is responsible
-              </span>
+          {listing?.policies?.map((policy, i) => (
+            <div key={i} className="flex items-center gap-x-1">
+              {policy.name === "Utilities" ? (
+                <VscTools className="text-2xl text-yellow-300" />
+              ) : policy.name === "Pet Policy" ? (
+                <MdOutlinePets className="text-2xl text-yellow-300" />
+              ) : (
+                <CiMoneyCheck1 className="text-2xl text-yellow-300" />
+              )}
+              <div className="flex flex-col gap-y-0">
+                <span className="text-base font-semibold md:text-lg capitalize">
+                  {policy.name}
+                </span>
+                <span className="text-xs md:text-sm text-gray-400 font-medium">
+                  {policy.policy}
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <MdOutlinePets className="text-2xl text-yellow-300" />
-            <div className="flex flex-col gap-y-0">
-              <span className="text-base font-semibold md:text-lg">Pet Policy</span>
-              <span className="text-xs md:text-sm text-gray-400 font-medium">
-                Pet Allowed
-              </span>
-            </div>
-          </div>
-          <div className="flex items-center gap-x-1">
-            <CiMoneyCheck1 className="text-2xl text-yellow-300" />
-            <div className="flex flex-col gap-y-0">
-              <span className="text-base font-semibold md:text-lg">Property Fees</span>
-              <span className="text-xs md:text-sm text-gray-400 font-medium">
-                Must have 3x the rent in total household income
-              </span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -53,15 +45,15 @@ export default function ItemInfo() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <TbRulerMeasure className="text-yellow-400" />
-            <span>{singlePostData.size} sqm</span>
+            <span>{listing.size} sqm</span>
           </div>
           <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <IoBedOutline className="text-yellow-400" />
-            <span>{singlePostData.bedRooms} Bedroom</span>
+            <span>{listing.bedRooms} Bedroom</span>
           </div>
           <div className="flex items-center gap-x-2 bg-base-200 p-2 rounded-md">
             <BiBath className="text-yellow-400" />
-            <span>{singlePostData.bathroom} Bathroom</span>
+            <span>{listing.bathRooms} Bathroom</span>
           </div>
         </div>
       </div>
@@ -71,22 +63,24 @@ export default function ItemInfo() {
           <div className="flex items-center gap-x-1">
             <IoSchoolOutline className="text-yellow-400 text-xl md:text-2xl" />
             <div className="flex flex-col">
-              <span className="text-xs font-semibold md:text-[0.5rem]">School</span>
-              <span className="text-xs text-gray-400 md:text-[0.5rem]">{singlePostData.school}</span>
+              <span className="text-xs font-semibold ">School</span>
+              <span className="text-xs text-gray-400 ">{listing.school}</span>
             </div>
           </div>
           <div className="flex items-center gap-x-1">
             <MdOutlineDirectionsBus className="text-yellow-400 text-xl md:text-2xl" />
             <div className="flex flex-col">
-              <span className="text-xs font-semibold md:text-[0.5rem]">Bus Stop</span>
-              <span className="text-xs text-gray-400 md:text-[0.5rem]">{singlePostData.bus}</span>
+              <span className="text-xs font-semibold ">Bus Stop</span>
+              <span className="text-xs text-gray-400 ">{listing.bus}</span>
             </div>
           </div>
           <div className="flex items-center gap-x-1">
             <GiFoodTruck className="text-yellow-400 text-xl md:text-2xl" />
             <div className="flex flex-col">
-              <span className="text-xs font-semibold md:text-[0.5rem]">Restaurant</span>
-              <span className="text-xs text-gray-400 md:text-[0.5rem]">{singlePostData.restaurant}</span>
+              <span className="text-xs font-semibold ">Restaurant</span>
+              <span className="text-xs text-gray-400 ">
+                {listing.restaurant}
+              </span>
             </div>
           </div>
         </div>
@@ -94,7 +88,7 @@ export default function ItemInfo() {
       <div className="flex flex-col gap-y-4 mt-4">
         <h2 className="text-lg font-semibold md:text-xl">Location</h2>
         <div className="w-full h-[12.5rem] z-[10]">
-          {/* <MapInfo /> */}
+          {/* {listing && <MapInfo listing={listing} />} */}
         </div>
       </div>
       <div className="flex items-center justify-between mt-4 pb-6">

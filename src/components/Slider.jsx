@@ -4,9 +4,10 @@ import { singlePostData } from "@/lib/data";
 import Image from "next/image";
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-export default function Slider() {
+export default function Slider({ listing }) {
   const item = singlePostData;
 
+  console.log(listing);
   const [open, setOpen] = useState(false);
   return (
     <div className="flex h-80 gap-x-2">
@@ -22,7 +23,7 @@ export default function Slider() {
           <IoMdClose />
         </button>
         <div className="carousel w-full h-full ">
-          {item.images.map((img, i) => (
+          {listing?.images?.map((img, i) => (
             <div
               key={i}
               id={`item${i + 1}`}
@@ -32,7 +33,7 @@ export default function Slider() {
             </div>
           ))}
           <div className="absolute flex justify-center w-full bg-gray-400/60 py-2 gap-4 bottom-0">
-            {singlePostData.images.map((img, i) => (
+            {listing?.images?.map((img, i) => (
               <a
                 key={i}
                 href={`#item${i + 1}`}
@@ -52,7 +53,7 @@ export default function Slider() {
       >
         <a href="#item1" className="h-full w-full">
           <Image
-            src={item.images[0]}
+            src={listing?.images && listing?.images[0]}
             objectFit="cover"
             className=" group-hover:scale-[1.1] duration-300 transition-all"
             alt=""
@@ -61,13 +62,13 @@ export default function Slider() {
         </a>
       </div>
       <div className="flex-1 flex flex-col justify-between">
-        {item.images.slice(1).map((img, i) => (
+        {listing?.images?.slice(1)?.map((img, i) => (
           <div
             key={i}
             className="relative h-24 overflow-hidden rounded-md group"
             onClick={() => setOpen(true)}
           >
-            <a href={`#item${i + 2}`} className="h-full w-full">
+            <a href={`#item ${i + 2}`} className="h-full w-full">
               <Image
                 src={img}
                 alt=""
